@@ -30,6 +30,9 @@ module.exports = {
       wasted: {
         type: Sequelize.BOOLEAN
       },
+      used: {
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

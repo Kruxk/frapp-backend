@@ -20,7 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     quantity: DataTypes.INTEGER,
     expirationDate: DataTypes.STRING,
     location: DataTypes.STRING,
-    wasted: DataTypes.BOOLEAN
+    wasted: DataTypes.BOOLEAN,
+    used: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Item',
