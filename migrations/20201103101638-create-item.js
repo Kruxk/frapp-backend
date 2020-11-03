@@ -15,7 +15,7 @@ module.exports = {
           key: "id",
         }
       },
-      Name: {
+      name: {
         type: Sequelize.STRING
       },
       quantity: {
