@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const corsMiddleWare = require("cors");
 const { PORT } = require("./config/constants");
+const authRouter = require("./routers/auth")
 
 //bodyparser
 app.use(express.json());
@@ -17,6 +18,8 @@ app.get("/", (req, res) => {
 app.post("/echo", (req, res) => {
   res.json(req.body);
 });
+
+app.use("/", authRouter)
 
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
