@@ -1,4 +1,5 @@
-const { Router } = require("express")
+const { Router } = require("express");
+const item = require("../models/item");
 const Item = require("../models").item
 
 const router = new Router();
@@ -21,4 +22,27 @@ router.post("/new", async (req, res, next) => {
     } catch (e) {
         next(e)
     }
+})
+
+router.patch("/used/:id", async (req, res, next) => {
+    const id = parseInt(req.params.id)
+    const { wasted } = req.body;
+    try {
+        const itemToUpdate = await Item.update(
+            { used: true, wasted },
+            { where: { id: id } }
+        )
+        res.send(itemToUpdate);
+    } catch (e) {
+        next(e)
+    }
+})
+
+router.delete("/delete/:id", async (req, res, next) => {
+    try {
+        const itemToDelete = await Item.destroy({ where: { id: req.params.id } });
+        itemToDelete ? res.send("received and destroyed") : res.send("item is already deleted")
+    } catch (e) {
+        next(e)
+    }   
 })
