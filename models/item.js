@@ -11,16 +11,17 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Item.belongsTo(models.User)
+      Item.belongsTo(models.User, { foreignKey: "userId" })
     }
   };
   Item.init({
     userId: DataTypes.INTEGER,
-    Name: DataTypes.STRING,
+    name: DataTypes.STRING,
     quantity: DataTypes.INTEGER,
     expirationDate: DataTypes.STRING,
     location: DataTypes.STRING,
-    wasted: DataTypes.BOOLEAN
+    wasted: { type: DataTypes.BOOLEAN, defaultValue: false },
+    used: { type: DataTypes.BOOLEAN, defaultValue: false }
   }, {
     sequelize,
     modelName: 'Item',
