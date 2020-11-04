@@ -2,15 +2,13 @@ const bcrypt = require('bcrypt')
 const { Router } = require('express')
 const { toJWT } = require('../auth/jwt')
 const authMiddleware = require('../auth/middleware')
-const User = require('../models/').User
 const { SALT_ROUNDS } = require('../config/constants')
+const User = require('../models').User
+
 
 const router = new Router()
 
 router.post('/login', async (req, res, next) => {
-	console.log("REQ BODY: ", req.body)
-	console.log("USER:", User)
-	console.log("===========================================================")
 	try {
 		const { email, password } = req.body
 
