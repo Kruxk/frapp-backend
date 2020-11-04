@@ -2,15 +2,13 @@ const bcrypt = require('bcrypt')
 const { Router } = require('express')
 const { toJWT } = require('../auth/jwt')
 const authMiddleware = require('../auth/middleware')
-const User = require('../models/').User
 const { SALT_ROUNDS } = require('../config/constants')
+const User = require('../models').User
+
 
 const router = new Router()
 
 router.post('/login', async (req, res, next) => {
-	console.log("REQ BODY: ", req.body)
-	console.log("USER:", User)
-	console.log("===========================================================")
 	try {
 		const { email, password } = req.body
 
@@ -41,11 +39,10 @@ router.post('/login', async (req, res, next) => {
 
 router.post('/signup', async (req, res) => {
 	const { firstName, lastName, email, password } = req.body
-	console.log('THIS IS REQ.BODY: ', req.body)
 	if (!firstName || !lastName || !email || !password) {
 		return res.status(400).send('Please make sure to enter all the details')
 	}
-
+	
 	try {
 		const newUser = await User.create({
       firstName,
