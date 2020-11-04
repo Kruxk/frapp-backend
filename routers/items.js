@@ -1,12 +1,14 @@
 const { Router } = require("express");
 const Item = require("../models").Item;
+const User = require("../models").User;
 
 const router = new Router();
 
-router.get("/", async (req, res, next) => {
-    const { userId } = req.body
-    if(!userId) {
-        res.status(412).send("Please supply valid json with the userId")
+router.get("/:id", async (req, res, next) => {
+    const userId = req.params.id;
+    const user = await User.findByPk(userId)
+    if(!user) {
+        res.status(404).send(`User with id ${userId} doesn't exist`)
         next()
     } else {
         try {
@@ -20,8 +22,13 @@ router.get("/", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
     const { name, quantity, expirationDate, location, userId } = req.body
-    if(!name || !quantity || !expirationDate || !location || !userId) {
-        res.status(412).send("Plz supply valid json with the proper fields to create an Item")
+    const user = await User.findByPk(userId)
+    if(!name || !quantity || !expirationDate || !location || !userId || !user) {
+        if(!user) {
+            res.status(404).send(`User with id ${userId} doesn't exist`)
+        } else {
+            res.status(412).send("Plz supply valid json with the proper fields to create an Item")
+        }        
         next()
     } else {
        try {
@@ -34,16 +41,22 @@ router.post("/", async (req, res, next) => {
 })
 
 router.patch("/:id", async (req, res, next) => {
-    const id = parseInt(req.params.id)
+    const userId = req.params.id;
     const { wasted } = req.body;
-    try {
-        const itemToUpdate = await Item.update(
-            { used: true, wasted },
-            { where: { id: id } }
-        )
-        res.send(itemToUpdate);
-    } catch (e) {
-        next(e)
+    const user = await User.findByPk(userId)
+    if(!user) {
+        res.status(404).send(`User with id ${userId} doesn't exist`)
+        next()
+    } else {
+       try {
+            const itemToUpdate = await Item.update(
+                { used: true, wasted },
+                { where: { id: id } }
+            )
+            res.send(itemToUpdate);
+        } catch (e) {
+            next(e)
+        }
     }
 })
 

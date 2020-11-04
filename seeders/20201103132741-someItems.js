@@ -30,6 +30,36 @@ module.exports = {
         wasted: false,
         createdAt: new Date(),
         updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        name: 'Milk',
+        quantity: 1,
+        expirationDate: new Date(),
+        location: 'fridge',
+        wasted: false,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        name: 'Butter',
+        quantity: 1,
+        expirationDate: new Date(),
+        location: 'fridge',
+        wasted: false,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        name: 'Juice',
+        quantity: 1,
+        expirationDate: new Date(),
+        location: 'fridge',
+        wasted: false,
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ])
   },
