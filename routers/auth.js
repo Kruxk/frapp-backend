@@ -2,13 +2,15 @@ const bcrypt = require('bcrypt')
 const { Router } = require('express')
 const { toJWT } = require('../auth/jwt')
 const authMiddleware = require('../auth/middleware')
-const User = require('../models/').user
-const Item = require('../models/').item
+const User = require('../models/').User
 const { SALT_ROUNDS } = require('../config/constants')
 
 const router = new Router()
 
 router.post('/login', async (req, res, next) => {
+	console.log("REQ BODY: ", req.body)
+	console.log("USER:", User)
+	console.log("===========================================================")
 	try {
 		const { email, password } = req.body
 
@@ -19,8 +21,7 @@ router.post('/login', async (req, res, next) => {
 		}
 
 		const user = await User.findOne({
-			where: { email },
-			// include: { model: Item },
+			where: { email }
 		})
 
 		if (!user || !bcrypt.compareSync(password, user.password)) {
@@ -50,8 +51,7 @@ router.post('/signup', async (req, res) => {
       firstName,
       lastName,
       email,
-			password: bcrypt.hashSync(password, SALT_ROUNDS),
-			image,
+			password: bcrypt.hashSync(password, SALT_ROUNDS)
 		})
 
 		delete newUser.dataValues['password'] // don't send back the password hash
