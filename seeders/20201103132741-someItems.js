@@ -22,7 +22,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        userId: 2,
+        userId: 1,
         name: 'Eggs',
         quantity: 1,
         expirationDate: new Date(),
