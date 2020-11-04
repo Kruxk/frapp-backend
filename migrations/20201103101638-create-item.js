@@ -15,7 +15,7 @@ module.exports = {
           key: "id",
         }
       },
-      Name: {
+      name: {
         type: Sequelize.STRING
       },
       quantity: {
@@ -28,6 +28,9 @@ module.exports = {
         type: Sequelize.STRING
       },
       wasted: {
+        type: Sequelize.BOOLEAN
+      },
+      used: {
         type: Sequelize.BOOLEAN
       },
       createdAt: {
