@@ -39,11 +39,10 @@ router.post('/login', async (req, res, next) => {
 
 router.post('/signup', async (req, res) => {
 	const { firstName, lastName, email, password } = req.body
-	console.log('THIS IS REQ.BODY: ', req.body)
 	if (!firstName || !lastName || !email || !password) {
 		return res.status(400).send('Please make sure to enter all the details')
 	}
-
+	
 	try {
 		const newUser = await User.create({
       firstName,
