@@ -1,4 +1,2 @@
-This backend uses docker to setup the database and such
-
-run this command to setup docker.
-docker run --name frapp -d -p 5432:5432 -e POSTGRES_PASSWORD=secret postgres
+This is the backend for the Frapp application.
+A frontend with a more detailed readme can be found [here](https://github.com/SupriyaShekar123/-frapp-frontend/tree/development).
