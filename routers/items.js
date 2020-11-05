@@ -20,8 +20,10 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.post("/", async (req, res, next) => {
-  const { name, quantity, expirationDate, location, userId } = req.body;
+router.post("/:id", async (req, res, next) => {
+  const userId = req.params.id;
+  const { name, quantity, expirationDate, location } = req.body;
+
   const user = await User.findByPk(userId);
   if (!name || !quantity || !expirationDate || !location || !userId || !user) {
     if (!user) {
